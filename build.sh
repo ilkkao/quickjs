@@ -3,11 +3,17 @@
 OUT="quick.js"
 OUT_MINIFIED="quick.min.js"
 INPUT="tokenizer compiler dom animation helper engine"
-MINIFIER=uglifyjs
+MINIFIER=""
 MINIFIER_OPTIONS=""
 MODULES_FOLDER="./modules/"
 QUICKJS=$PWD/bin/quickjs
 QUICKJS_OPTIONS="-s"
+
+if command -v uglifyjs >/dev/null 2>&1; then
+    MINIFIER=uglifyjs
+else
+    echo "WARN: UglifyJS not found. Skipping minification steps."
+fi
 
 #### batching all quickjs files into one
 echo "Create batched $OUT file."
@@ -23,10 +29,12 @@ echo "Done."
 echo ""
 
 #### minify combined file
-echo "Minify $OUT to $OUT_MINIFIED."
-$MINIFIER $MINIFIER_OPTIONS $OUT -o $OUT_MINIFIED
-echo "Done."
-echo ""
+if [ -n "$MINIFIER" ]; then
+    echo "Minify $OUT to $OUT_MINIFIED."
+    $MINIFIER $MINIFIER_OPTIONS $OUT -o $OUT_MINIFIED
+    echo "Done."
+    echo ""
+fi
 
 #### Generating modules
 echo "Generate JavaScript files for modules in $MODULES_FOLDER."
@@ -34,8 +42,10 @@ for file in `find $MODULES_FOLDER -name "*.jml"`; do
     echo " -> Process $file..."
     echo "  -> Generate JavaScript from JML..."
     $QUICKJS $QUICKJS_OPTIONS $file $file.js
+if [ -n "$MINIFIER" ]; then
     echo "  -> Minify $file.js to $file.min.js"
     $MINIFIER $MINIFIER_OPTIONS $file.js -o $file.min.js
+fi
 done
 echo "Done."
 echo ""
