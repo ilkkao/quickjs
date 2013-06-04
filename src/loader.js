@@ -9,7 +9,7 @@
 //
 
 (function() {
-    var files = ['tokenizer', 'compiler', 'dom', 'animation', 'helper',
+    var files = ['tokenizer', 'compiler', 'canvas', 'animation', 'helper',
                  'engine'];
     var head = document.getElementsByTagName('head')[0];
     var scripts = document.getElementsByTagName('script');

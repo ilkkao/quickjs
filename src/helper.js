@@ -17,6 +17,19 @@ Quick.debug = false;
 Quick.verbose = false;
 
 Quick.run = function () {
+    var canvas = document.createElement('canvas');
+    canvas.id = "QuickCanvas";
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.zIndex = -1;
+    canvas.style.position = "absolute";
+    canvas.style.backgroundColor = "blue";
+
+    document.body.style.margin = 0;
+    document.body.style.padding = 0;
+
+    document.body.appendChild(canvas);
+
     Quick.useQueryFlags();
     Quick.compileScriptTags();
     Quick.Engine.start();

@@ -35,7 +35,7 @@ if (!Quick.Engine) {
 
         // try to create a renderer backend, currently on DOM supported
         try {
-            var renderer = new Quick.RendererDOM();
+            var renderer = new Quick.RendererCanvas();
             ret.createElement = renderer.createElement;
             ret.addElement = renderer.addElement;
             ret.addElements = renderer.addElements;

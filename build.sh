@@ -2,7 +2,7 @@
 
 OUT="quick.js"
 OUT_MINIFIED="quick.min.js"
-INPUT="tokenizer compiler dom animation helper engine"
+INPUT="tokenizer compiler canvas animation helper engine"
 MINIFIER=""
 MINIFIER_OPTIONS=""
 MODULES_FOLDER="./modules/"
