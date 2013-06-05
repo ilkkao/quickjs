@@ -9,8 +9,8 @@
 //
 
 (function() {
-    var files = ['tokenizer', 'compiler', 'canvas', 'animation', 'helper',
-                 'engine'];
+    var files = ['tokenizer', 'compiler', 'elements', 'dom', 'canvas',
+                 'animation', 'helper', 'engine'];
     var head = document.getElementsByTagName('head')[0];
     var scripts = document.getElementsByTagName('script');
     var loaded = 0;
