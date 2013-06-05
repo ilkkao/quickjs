@@ -21,12 +21,33 @@ Quick.run = function () {
     canvas.id = "QuickCanvas";
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
-    canvas.style.zIndex = -1;
     canvas.style.position = "absolute";
-    canvas.style.backgroundColor = "blue";
+    canvas.style.backgroundColor = "white";
 
     document.body.style.margin = 0;
     document.body.style.padding = 0;
+
+    var x,y;
+
+    canvas.addEventListener('mousemove', function(evt) {
+        var rect = canvas.getBoundingClientRect();
+        x = evt.clientX - rect.left;
+        y = evt.clientY - rect.top;
+
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, 400, 20);
+        context.font = '12pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText('Mouse position: ' + x + ',' + y, 10, 1);
+    }, false);
+
+    canvas.addEventListener('mousedown', function(evt) {
+        Quick.Engine.handleMouseDown(x, y);
+    }, false);
+
+    canvas.addEventListener('mouseup', function(evt) {
+        Quick.Engine.handleMouseUp(x, y);
+    }, false);
 
     document.body.appendChild(canvas);
 

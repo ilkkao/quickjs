@@ -27,6 +27,12 @@ Quick.RendererCanvas.prototype.removeElement = function (element, parent) {
 Quick.RendererCanvas.prototype.addElements = function (elements, parent) {
 };
 
+Quick.RendererCanvas.prototype.handleMouseUp = function (x, y) {
+};
+
+Quick.RendererCanvas.prototype.handleMouseDown= function (x, y) {
+};
+
 Quick.RendererCanvas.prototype.renderElement = function (element) {
     if (!element._dirtyProperties) {
         return;
@@ -42,8 +48,7 @@ Quick.RendererCanvas.prototype.renderElement = function (element) {
     var ctx  = document.getElementById("QuickCanvas").getContext("2d");
 
     // tough luck, we need to repaint everything
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     function drawElement(myElem) {
         var parent = myElem.parent;
@@ -51,8 +56,8 @@ Quick.RendererCanvas.prototype.renderElement = function (element) {
         var top = myElem.top;
 
         while (parent) {
-            left += parent.left;
-            top += parent.top;
+            left += isNaN(parent.left) ? 0 : parent.left;
+            top += isNaN(parent.top) ? 0 : parent.top;
             parent = parent.parent;
         }
 

@@ -41,6 +41,8 @@ if (!Quick.Engine) {
             ret.addElements = renderer.addElements;
             ret.renderElement = renderer.renderElement;
             ret.removeElement = renderer.removeElement;
+            ret.handleMouseUp = renderer.handleMouseUp;
+            ret.handleMouseDown = renderer.handleMouseDown;
         } catch (e) {
             log("Cannot create DOM renderer", true);
             ret.createElement = function () {};
