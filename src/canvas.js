@@ -61,6 +61,14 @@ Quick.RendererCanvas.prototype.renderElement = function (element) {
             ctx.fillStyle = myElem.textColor;
             ctx.textBaseline = 'top';
             ctx.fillText(myElem.text, left, top);
+        } else if (myElem._properties['-image-src']) {
+            var img = new Image();
+            img.onload = function() {
+                var imgHeigth = myElem.heigth ? myElem.height : myElem.width;
+                ctx.drawImage(img, left, top, myElem.width, imgHeigth);
+                console.log("Image: ", left, top, myElem.width, imgHeigth);
+            };
+            img.src = myElem['-image-src'];
         } else {
             ctx.fillStyle = myElem.backgroundColor;
             ctx.fillRect(left,
@@ -68,11 +76,7 @@ Quick.RendererCanvas.prototype.renderElement = function (element) {
                          myElem.width,
                          myElem.height);
 
-            console.log("Rectangle: ",
-                        left,
-                        top,
-                        myElem.width,
-                        myElem.height);
+            console.log("Rectangle: ", left, top, myElem.width, myElem.height);
           }
     };
 
